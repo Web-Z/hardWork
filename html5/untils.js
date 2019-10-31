@@ -22,7 +22,7 @@ export const getDate = (time) => {
 //days:天数
 //targetDate:指定天数
 //返回值：Boolean值
-let isIwantDate = (days, targetDate) => {
+export const isIwantDate = (days, targetDate) => {
   let now = new Date();
   //把现在的时间往前推指定天数,之后的订单都是需要的
   now.setDate(now.getDate() - days);
@@ -37,6 +37,19 @@ let isIwantDate = (days, targetDate) => {
   } else {
     return cha > 0 || cha == 0;
   }
+}
+
+//传入input对象，返回视频时长
+// e:event对象
+export const getVedioTime = (e) => {
+  let content = e.target.files[0]
+  let url = URL.createObjectURL(content);
+  let audioElement = new Audio(url);
+  let duration;
+  audioElement.addEventListener("loadedmetadata", (e)=> {
+    duration = audioElement.duration;
+  }
+  return duration;
 }
 
 
