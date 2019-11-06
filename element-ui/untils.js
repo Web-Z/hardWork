@@ -33,3 +33,14 @@ export const isSearch = param => {
   return param
 }
 
+//element-ui自定义排序方案
+//后台需求：descs（降）ascs（升）为键  要排序的字段为值
+//返回值:处理过的请求参数
+export const sortParams = (val,row,param) => {
+  delete param["descs"];
+  delete param["ascs"];
+  let order = val.order || "descs";
+  let key = order.startsWith("a") ? "ascs" : "descs";
+  param[key] = toLine(val.prop);
+  return param;
+}
